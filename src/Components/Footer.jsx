@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div className='d-flex justify-content-center align-items-center flex-column' style={{width:'100%',height:'300px'}}>
       <div className='footer-content d-flex justify-content-evenly w-100 flex-wrap'>
-        <div className='website d-flex flex-column'>
+        <div className='w-50 website d-flex flex-column'>
         <h4><i className="fa-solid fa-cloud-arrow-up" style={{color: '#ffffff'}}></i>{' '}Media Player</h4>
 <h6>
     Designed and built with all the love in the world by the Media team with the help of our contributors.</h6>
@@ -30,11 +30,11 @@ function Footer() {
 
             </div>
             <div>
-            <Link to={'/'} className='mx-2' style={{textDecoration:'none',color:'white'}}><i class="fa-brands fa-linkedin" style={{color: '#ffffff'}}></i></Link>
+            <Link to={'/'} className='mx-2' style={{textDecoration:'none',color:'white'}}><i className="fa-brands fa-linkedin" style={{color: '#ffffff'}}></i></Link>
             <Link to={'/'} className='mx-3' style={{textDecoration:'none',color:'white'}}>
-            <i class="fa-brands fa-twitter" style={{textDecoration:'none',color:'white'}}></i></Link>
-            <Link to={'/'} className='mx-3' style={{textDecoration:'none',color:'white'}}><i class="fa-brands fa-facebook-f" style={{textDecoration:'none',color:'white'}}></i></Link>
-            <Link to={'/'} className='mx-2' style={{textDecoration:'none',color:'white'}}><i class="fa-regular fa-envelope" style={{textDecoration:'none',color:'white'}}></i></Link>
+            <i className="fa-brands fa-twitter" style={{textDecoration:'none',color:'white'}}></i></Link>
+            <Link to={'/'} className='mx-3' style={{textDecoration:'none',color:'white'}}><i className="fa-brands fa-facebook-f" style={{textDecoration:'none',color:'white'}}></i></Link>
+            <Link to={'/'} className='mx-2' style={{textDecoration:'none',color:'white'}}><i className="fa-regular fa-envelope" style={{textDecoration:'none',color:'white'}}></i></Link>
             
             </div>
         </div>
@@ -45,4 +45,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default Footer

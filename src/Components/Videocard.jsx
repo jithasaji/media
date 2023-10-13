@@ -1,34 +1,52 @@
 import React from 'react'
 import { useState } from 'react';
 import { Card,Modal } from 'react-bootstrap'
-import { deleteAVideo } from '../services/allAPI';
+import { addHistory, deleteAVideo } from '../services/allAPI';
 
 
 
-function VideoCard({displayData,setDeleteSpecificVideo}) {
+function VideoCard({displayData,setDeleteVideoStatus,insideCategory}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = async() =>{ 
+    setShow(true);
+  // get caption and link
+  const {caption,embedlink} = displayData
+  // generate time stamp
+  let today = new Date()
+  const timeStamp = new  Intl.DateTimeFormat("en-US",{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(today)
+  // watch video to add json server
+  let reqBody ={
+    caption,embedlink,timeStamp
+  }
+  // make api call
+  await addHistory(reqBody)
+  }
 
   const deleteSingleVideo = async (id)=>{
     console.log(id);
     const response = await deleteAVideo(id)
       console.log(response);
-        setDeleteSpecificVideo(true)
+      setDeleteVideoStatus(true)
         alert(`Video deleted Successfully`)
   }
-
+   
+   const dragStarted = (e,id)=>{
+    console.log("Drag started");
+    e.dataTransfer.setData("cardId",id)
+   }
   return (
     <>
     {
       displayData &&
-      <Card className='mb-4'>
+      <Card className='mb-3' draggable onDragStart={(e)=>dragStarted(e,displayData?.id)}>
       <Card.Img onClick={handleShow} style={{height:'180px',cursor:'pointer'}} className="w-100" variant="top" src={displayData?.url}/>
       <Card.Body>
         <Card.Title className="d-flex justify-content-between align-items-center">
           <h6>{displayData?.caption}</h6>
-          <button onClick={()=>deleteSingleVideo(displayData?.id)} className='btn'><i className="fa-solid fa-trash text-danger"></i></button>
+        { insideCategory?"": <button onClick={()=>deleteSingleVideo(displayData?.id)} className='btn'><i className="fa-solid fa-trash text-danger"></i></button>
+          }
         </Card.Title>
       </Card.Body>
     </Card>
@@ -46,4 +64,4 @@ function VideoCard({displayData,setDeleteSpecificVideo}) {
   )
 }
 
-export default VideoCard
+export default VideoCard
